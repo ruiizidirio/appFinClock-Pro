@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinClock Pro - Sistema Completo</title>
+    <title>FinClock Pro - Sistema Completo com Edição</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,6 +18,7 @@
             --input-bg: #fff;
             --item-bg: #f8fafc;
             --shadow: 0 8px 20px rgba(0,0,0,0.1);
+            --edit-bg: #e0e7ff;
         }
         body.dark {
             --bg-grad: linear-gradient(135deg, #0f172a, #1e1b4b, #2e1065);
@@ -29,6 +30,7 @@
             --input-bg: #0f172a;
             --item-bg: #334155;
             --shadow: 0 8px 20px rgba(0,0,0,0.3);
+            --edit-bg: #2d3a5e;
         }
         body {
             font-family: 'Segoe UI', system-ui;
@@ -41,7 +43,7 @@
         @keyframes grad { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
         
         .container {
-            max-width: 700px;
+            max-width: 800px;
             margin: auto;
             background: var(--container-bg);
             border-radius: 32px;
@@ -129,9 +131,11 @@
             border-radius: 16px;
             font-weight: bold;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
+        button:hover { opacity: 0.9; }
         .lista {
-            max-height: 300px;
+            max-height: 350px;
             overflow-y: auto;
             list-style: none;
         }
@@ -142,21 +146,34 @@
             margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-left: 4px solid;
             color: var(--text-primary);
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .entrada { border-left-color: #10b981; }
         .saida { border-left-color: #ef4444; }
         .pagar { border-left-color: #f59e0b; }
         .receber { border-left-color: #10b981; }
-        .delete {
-            background: rgba(239,68,68,0.2);
+        .item-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .edit-btn, .delete-btn {
+            background: rgba(100,100,100,0.2);
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 12px;
             cursor: pointer;
-            color: #ef4444;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transition: 0.2s;
         }
+        .edit-btn { background: #3b82f6; color: white; }
+        .delete-btn { background: #ef4444; color: white; }
+        .edit-btn:hover { background: #2563eb; }
+        .delete-btn:hover { background: #dc2626; }
         canvas { max-height: 200px; }
         .empty { text-align: center; padding: 30px; color: var(--text-secondary); }
         .support-center {
@@ -184,6 +201,42 @@
             color: #d97706;
             margin-top: 12px;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 32px;
+            padding: 25px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            color: var(--text-primary);
+        }
+        .modal-content h3 { margin-bottom: 20px; }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .modal-buttons button { flex: 1; }
+        .close-modal { background: #64748b; }
+        .spec-badge {
+            font-size: 0.7rem;
+            background: rgba(0,0,0,0.1);
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        .specs-area {
+            margin-top: 8px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -191,7 +244,7 @@
     <div class="header-row">
         <div class="relogio">
             <div id="clock">--:--:--</div>
-            <div>⏰ FinClock Pro</div>
+            <div>⏰ FinClock Pro | Edição Completa</div>
         </div>
         <button class="theme-toggle" id="themeToggle">🌙</button>
     </div>
@@ -231,7 +284,7 @@
             <button id="addTransBtn">+ Adicionar Transação</button>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <strong>📋 Histórico</strong>
+            <strong>📋 Histórico (Entrada/Saída)</strong>
             <button id="clearTransBtn" style="width: auto; background: #ef4444; padding: 5px 12px;">Limpar tudo</button>
         </div>
         <ul id="historyList" class="lista"><li class="empty">✨ Nenhuma transação</li></ul>
@@ -249,7 +302,7 @@
             <button id="addAgendaBtn">+ Adicionar à Agenda</button>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <strong>⚠️ Próximas Contas</strong>
+            <strong>⚠️ Próximas Contas (Pagar/Receber)</strong>
             <button id="clearAgendaBtn" style="width: auto; background: #ef4444; padding: 5px 12px;">Limpar agenda</button>
         </div>
         <ul id="agendaList" class="lista"><li class="empty">📭 Nenhuma conta agendada</li></ul>
@@ -262,20 +315,64 @@
     </div>
 </div>
 
-<script>
-    // DADOS
-    let transacoes = [];
-    let agenda = [];
-    let chart;
+<!-- Modal de Edição -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h3 id="modalTitle">✏️ Editar Item</h3>
+        <input type="text" id="editDesc" placeholder="Descrição">
+        <input type="number" id="editValor" placeholder="Valor (R$)" step="0.01">
+        <div id="editDateContainer" style="display: none;">
+            <input type="date" id="editData">
+        </div>
+        <select id="editTipo">
+            <option value="entrada">💰 Entrada</option>
+            <option value="saida">💸 Saída</option>
+            <option value="pagar">💸 Pagar</option>
+            <option value="receber">💰 Receber</option>
+        </select>
+        <div class="modal-buttons">
+            <button id="saveEditBtn">💾 Salvar</button>
+            <button id="closeModalBtn" class="close-modal">❌ Cancelar</button>
+        </div>
+    </div>
+</div>
 
-    // RELÓGIO
+<script>
+    // ==================== ESTRUTURA DE DADOS ====================
+    let transacoes = [];      // { id, desc, valor, data, hora, tipoOrigem }
+    let agenda = [];          // { id, desc, valor, data, tipo }
+    let chart;
+    let currentEditType = null;    // 'transacao' ou 'agenda'
+    let currentEditId = null;
+
+    // ==================== FUNÇÕES AUXILIARES ====================
+    function escapeHtml(str) {
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function formatarDataLocal(dataString) {
+        if (!dataString) return '';
+        const [ano, mes, dia] = dataString.split('-').map(Number);
+        return new Date(ano, mes-1, dia).toLocaleDateString('pt-BR');
+    }
+
+    function criarDataLocal(ano, mes, dia) {
+        return new Date(ano, mes - 1, dia);
+    }
+
+    // Relógio
     function atualizarRelogio() {
         document.getElementById('clock').innerText = new Date().toLocaleTimeString('pt-BR');
     }
     setInterval(atualizarRelogio, 1000);
     atualizarRelogio();
 
-    // TEMA
+    // Tema
     function initTheme() {
         const saved = localStorage.getItem('theme');
         if (saved === 'dark') {
@@ -298,13 +395,13 @@
         }
     }
 
-    // PERSISTÊNCIA
+    // Persistência
     function salvarTransacoes() { localStorage.setItem('transacoes', JSON.stringify(transacoes)); }
     function carregarTransacoes() { const t = localStorage.getItem('transacoes'); if (t) transacoes = JSON.parse(t); }
     function salvarAgenda() { localStorage.setItem('agenda', JSON.stringify(agenda)); }
     function carregarAgenda() { const a = localStorage.getItem('agenda'); if (a) agenda = JSON.parse(a); }
 
-    // GRÁFICO
+    // Gráfico
     function atualizarGrafico() {
         const totalIn = transacoes.filter(t => t.valor > 0).reduce((a,b) => a + b.valor, 0);
         const totalOut = transacoes.filter(t => t.valor < 0).reduce((a,b) => a + Math.abs(b.valor), 0);
@@ -317,47 +414,92 @@
         });
     }
 
-    // ATUALIZAR INTERFACE (transações)
-    function atualizarUI() {
-        let total = 0, totalIn = 0, totalOut = 0;
-        transacoes.forEach(t => {
-            total += t.valor;
-            if (t.valor > 0) totalIn += t.valor;
-            else totalOut += -t.valor;
-        });
-        document.getElementById('balance').innerHTML = `R$ ${total.toFixed(2)}`;
-        document.getElementById('totalIncome').innerHTML = `R$ ${totalIn.toFixed(2)}`;
-        document.getElementById('totalExpense').innerHTML = `R$ ${totalOut.toFixed(2)}`;
-
-        const lista = document.getElementById('historyList');
-        if (transacoes.length === 0) {
-            lista.innerHTML = '<li class="empty">✨ Nenhuma transação</li>';
-        } else {
-            lista.innerHTML = '';
-            transacoes.forEach(t => {
-                const li = document.createElement('li');
-                li.className = `item ${t.valor > 0 ? 'entrada' : 'saida'}`;
-                li.innerHTML = `<div><strong>${escapeHtml(t.desc)}</strong><br><small>${t.data} ${t.hora}</small></div>
-                                <div><strong style="color:${t.valor>0?'#10b981':'#ef4444'}">${t.valor>0?'+':'-'} R$ ${Math.abs(t.valor).toFixed(2)}</strong>
-                                <button class="delete" data-id="${t.id}">🗑️</button></div>`;
-                lista.appendChild(li);
-            });
-            document.querySelectorAll('#historyList .delete').forEach(btn => {
-                btn.onclick = (e) => {
-                    e.stopPropagation();
-                    const id = parseInt(btn.getAttribute('data-id'));
-                    deletarTransacao(id);
-                };
-            });
+    // ==================== EDIÇÃO GENÉRICA (ENTRADA/SAÍDA ESPECIFICAÇÕES) ====================
+    function abrirModalEdicao(tipo, id, itemAtual) {
+        currentEditType = tipo;
+        currentEditId = id;
+        document.getElementById('editDesc').value = itemAtual.desc;
+        document.getElementById('editValor').value = Math.abs(itemAtual.valor);
+        
+        const editTipoSelect = document.getElementById('editTipo');
+        const dateContainer = document.getElementById('editDateContainer');
+        
+        if (tipo === 'transacao') {
+            dateContainer.style.display = 'none';
+            // Define as opções do select para transação
+            editTipoSelect.innerHTML = '<option value="entrada">💰 Entrada</option><option value="saida">💸 Saída</option>';
+            const isEntrada = itemAtual.valor > 0;
+            editTipoSelect.value = isEntrada ? 'entrada' : 'saida';
+            document.getElementById('modalTitle').innerText = '✏️ Editar Transação (Entrada/Saída)';
+        } 
+        else if (tipo === 'agenda') {
+            dateContainer.style.display = 'block';
+            document.getElementById('editData').value = itemAtual.data || '';
+            editTipoSelect.innerHTML = '<option value="pagar">💸 Conta a Pagar</option><option value="receber">💰 Conta a Receber</option>';
+            editTipoSelect.value = itemAtual.tipo;
+            document.getElementById('modalTitle').innerText = '✏️ Editar Agenda (Pagar/Receber)';
         }
-        atualizarGrafico();
+        document.getElementById('editModal').style.display = 'flex';
     }
 
+    function fecharModal() {
+        document.getElementById('editModal').style.display = 'none';
+        currentEditType = null;
+        currentEditId = null;
+    }
+
+    function salvarEdicao() {
+        const novaDesc = document.getElementById('editDesc').value.trim();
+        let novoValorNum = parseFloat(document.getElementById('editValor').value);
+        if (!novaDesc || isNaN(novoValorNum) || novoValorNum <= 0) {
+            alert('Preencha descrição válida e valor positivo!');
+            return;
+        }
+        
+        if (currentEditType === 'transacao') {
+            const novoTipo = document.getElementById('editTipo').value; // 'entrada' ou 'saida'
+            const novoValorFinal = novoTipo === 'entrada' ? novoValorNum : -novoValorNum;
+            const index = transacoes.findIndex(t => t.id === currentEditId);
+            if (index !== -1) {
+                transacoes[index].desc = novaDesc;
+                transacoes[index].valor = novoValorFinal;
+                salvarTransacoes();
+                atualizarUI();
+            }
+        } 
+        else if (currentEditType === 'agenda') {
+            const novoTipo = document.getElementById('editTipo').value; // 'pagar' ou 'receber'
+            const novaData = document.getElementById('editData').value;
+            if (!novaData) {
+                alert('Selecione uma data para a agenda!');
+                return;
+            }
+            const index = agenda.findIndex(a => a.id === currentEditId);
+            if (index !== -1) {
+                agenda[index].desc = novaDesc;
+                agenda[index].valor = novoValorNum;
+                agenda[index].tipo = novoTipo;
+                agenda[index].data = novaData;
+                salvarAgenda();
+                renderizarAgenda();
+            }
+        }
+        fecharModal();
+    }
+
+    // ==================== TRANSAÇÕES (com edição) ====================
     function deletarTransacao(id) {
         if (confirm('Remover esta transação?')) {
             transacoes = transacoes.filter(t => t.id !== id);
             salvarTransacoes();
             atualizarUI();
+        }
+    }
+
+    function editarTransacao(id) {
+        const transacao = transacoes.find(t => t.id === id);
+        if (transacao) {
+            abrirModalEdicao('transacao', id, transacao);
         }
     }
 
@@ -385,17 +527,93 @@
         }
     }
 
-    // ==================== AGENDA CORRIGIDA (SEM FUSO) ====================
-    // Função auxiliar para criar uma data local (sem deslocamento UTC)
-    function criarDataLocal(ano, mes, dia) {
-        return new Date(ano, mes - 1, dia);
+    function atualizarUI() {
+        let total = 0, totalIn = 0, totalOut = 0;
+        transacoes.forEach(t => {
+            total += t.valor;
+            if (t.valor > 0) totalIn += t.valor;
+            else totalOut += -t.valor;
+        });
+        document.getElementById('balance').innerHTML = `R$ ${total.toFixed(2)}`;
+        document.getElementById('totalIncome').innerHTML = `R$ ${totalIn.toFixed(2)}`;
+        document.getElementById('totalExpense').innerHTML = `R$ ${totalOut.toFixed(2)}`;
+
+        const lista = document.getElementById('historyList');
+        if (transacoes.length === 0) {
+            lista.innerHTML = '<li class="empty">✨ Nenhuma transação</li>';
+        } else {
+            lista.innerHTML = '';
+            transacoes.forEach(t => {
+                const li = document.createElement('li');
+                li.className = `item ${t.valor > 0 ? 'entrada' : 'saida'}`;
+                // Exibir especificações detalhadas: entrada/saída com valores claros
+                const tipoTexto = t.valor > 0 ? '💰 ENTRADA' : '💸 SAÍDA';
+                const corValor = t.valor > 0 ? '#10b981' : '#ef4444';
+                const sinal = t.valor > 0 ? '+' : '-';
+                li.innerHTML = `
+                    <div style="flex:1">
+                        <strong>${escapeHtml(t.desc)}</strong>
+                        <div class="specs-area">
+                            📌 ${tipoTexto} • R$ ${Math.abs(t.valor).toFixed(2)}
+                            <span class="spec-badge">📅 ${t.data} ⏰ ${t.hora}</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="edit-btn" data-id="${t.id}">✏️ Editar</button>
+                        <button class="delete-btn" data-id="${t.id}">🗑️</button>
+                    </div>
+                `;
+                lista.appendChild(li);
+            });
+            // Eventos dinâmicos
+            document.querySelectorAll('#historyList .edit-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    editarTransacao(id);
+                };
+            });
+            document.querySelectorAll('#historyList .delete-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const id = parseInt(btn.getAttribute('data-id'));
+                    deletarTransacao(id);
+                };
+            });
+        }
+        atualizarGrafico();
     }
 
-    function formatarDataLocal(dataString) {
-        // dataString vem no formato YYYY-MM-DD (ex: "2025-04-25")
-        const [ano, mes, dia] = dataString.split('-').map(Number);
-        const dataLocal = criarDataLocal(ano, mes, dia);
-        return dataLocal.toLocaleDateString('pt-BR');
+    // ==================== AGENDA COM EDIÇÃO ====================
+    function deletarAgenda(id) {
+        if (confirm('Remover esta conta da agenda?')) {
+            agenda = agenda.filter(a => a.id !== id);
+            salvarAgenda();
+            renderizarAgenda();
+        }
+    }
+
+    function editarAgenda(id) {
+        const item = agenda.find(a => a.id === id);
+        if (item) {
+            abrirModalEdicao('agenda', id, item);
+        }
+    }
+
+    function adicionarAgenda(desc, valor, data, tipo) {
+        if (!desc || isNaN(valor) || valor <= 0 || !data) return false;
+        agenda.push({ id: Date.now(), desc, valor, data, tipo });
+        salvarAgenda();
+        renderizarAgenda();
+        return true;
+    }
+
+    function limparAgenda() {
+        if (agenda.length && confirm('Apagar todas as contas da agenda?')) {
+            agenda = [];
+            salvarAgenda();
+            renderizarAgenda();
+        }
     }
 
     function renderizarAgenda() {
@@ -424,15 +642,35 @@
             else if (diff === 1) status = 'Vence amanhã';
             else status = `Vence em ${diff} dias`;
             
+            const tipoDisplay = item.tipo === 'pagar' ? '💸 CONTA A PAGAR' : '💰 CONTA A RECEBER';
+            const corTipo = item.tipo === 'pagar' ? '#f59e0b' : '#10b981';
+            
             const li = document.createElement('li');
             li.className = `item ${item.tipo === 'pagar' ? 'pagar' : 'receber'}`;
-            li.innerHTML = `<div><strong>${item.tipo === 'pagar' ? '💸' : '💰'} ${escapeHtml(item.desc)}</strong><br><small>📅 ${formatarDataLocal(item.data)} • ${status}</small></div>
-                            <div><strong style="color:${item.tipo==='pagar'?'#f59e0b':'#10b981'}">R$ ${item.valor.toFixed(2)}</strong>
-                            <button class="delete" data-id="${item.id}">🗑️</button></div>`;
+            li.innerHTML = `
+                <div style="flex:1">
+                    <strong>${escapeHtml(item.desc)}</strong>
+                    <div class="specs-area">
+                        📌 ${tipoDisplay} • Valor: R$ ${item.valor.toFixed(2)}
+                        <span class="spec-badge">📅 ${formatarDataLocal(item.data)} • ${status}</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <button class="edit-btn" data-id="${item.id}">✏️ Editar</button>
+                    <button class="delete-btn" data-id="${item.id}">🗑️</button>
+                </div>
+            `;
             container.appendChild(li);
         });
         
-        document.querySelectorAll('#agendaList .delete').forEach(btn => {
+        document.querySelectorAll('#agendaList .edit-btn').forEach(btn => {
+            btn.onclick = (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                editarAgenda(id);
+            };
+        });
+        document.querySelectorAll('#agendaList .delete-btn').forEach(btn => {
             btn.onclick = (e) => {
                 e.stopPropagation();
                 const id = parseInt(btn.getAttribute('data-id'));
@@ -441,41 +679,7 @@
         });
     }
 
-    function adicionarAgenda(desc, valor, data, tipo) {
-        if (!desc || isNaN(valor) || valor <= 0 || !data) return false;
-        // data já está no formato YYYY-MM-DD, armazenamos diretamente
-        agenda.push({ id: Date.now(), desc, valor, data, tipo });
-        salvarAgenda();
-        renderizarAgenda();
-        return true;
-    }
-
-    function deletarAgenda(id) {
-        if (confirm('Remover esta conta da agenda?')) {
-            agenda = agenda.filter(a => a.id !== id);
-            salvarAgenda();
-            renderizarAgenda();
-        }
-    }
-
-    function limparAgenda() {
-        if (agenda.length && confirm('Apagar todas as contas da agenda?')) {
-            agenda = [];
-            salvarAgenda();
-            renderizarAgenda();
-        }
-    }
-
-    function escapeHtml(str) {
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    // ABAS
+    // ==================== ABAS ====================
     function trocarAba(aba) {
         document.getElementById('transPanel').style.display = aba === 'trans' ? 'block' : 'none';
         document.getElementById('agendaPanel').style.display = aba === 'agenda' ? 'block' : 'none';
@@ -485,7 +689,7 @@
         if (aba === 'agenda') renderizarAgenda();
     }
 
-    // INICIALIZAÇÃO
+    // ==================== INICIALIZAÇÃO ====================
     window.onload = () => {
         carregarTransacoes();
         carregarAgenda();
@@ -493,6 +697,7 @@
         renderizarAgenda();
         initTheme();
 
+        // Eventos transações
         document.getElementById('addTransBtn').onclick = () => {
             const desc = document.getElementById('desc').value.trim();
             const valor = parseFloat(document.getElementById('valor').value);
@@ -503,6 +708,8 @@
             } else alert('Preencha descrição e valor positivo');
         };
         document.getElementById('clearTransBtn').onclick = limparTransacoes;
+        
+        // Eventos agenda
         document.getElementById('addAgendaBtn').onclick = () => {
             const desc = document.getElementById('agendaDesc').value.trim();
             const valor = parseFloat(document.getElementById('agendaValor').value);
@@ -512,14 +719,22 @@
                 document.getElementById('agendaDesc').value = '';
                 document.getElementById('agendaValor').value = '';
                 document.getElementById('agendaData').value = '';
-            } else alert('Preencha todos os campos');
+            } else alert('Preencha todos os campos (descrição, valor positivo e data)');
         };
         document.getElementById('clearAgendaBtn').onclick = limparAgenda;
+        
+        // Abas
         document.querySelectorAll('.tab').forEach(tab => {
             tab.onclick = () => trocarAba(tab.getAttribute('data-tab'));
         });
         document.getElementById('themeToggle').onclick = toggleTheme;
-
+        
+        // Modal
+        document.getElementById('saveEditBtn').onclick = salvarEdicao;
+        document.getElementById('closeModalBtn').onclick = fecharModal;
+        window.onclick = (e) => { if (e.target === document.getElementById('editModal')) fecharModal(); };
+        
+        // Apoio
         const linkMP = 'https://mpago.la/2jTi6RV';
         document.getElementById('supportCenterBtn').onclick = () => window.open(linkMP, '_blank');
         document.getElementById('supportBtn').onclick = () => window.open(linkMP, '_blank');
