@@ -1,9 +1,30 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinClock Pro - Sistema Completo com Edição</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>FinClock Pro</title>
+    
+    <!-- Configurações PWA para tela inicial do celular -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FinClock Pro">
+    <meta name="application-name" content="FinClock Pro">
+    <meta name="msapplication-TileColor" content="#667eea">
+    
+    <!-- Ícone para iOS (iPhone/iPad) -->
+    <link rel="apple-touch-icon" sizes="57x57" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="72x72" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="114x114" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="120x120" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="144x144" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="152x152" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    
+    <!-- Ícone para Android/Chrome -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" sizes="192x192" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" sizes="512x512" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E">
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -237,14 +258,58 @@
             font-size: 0.8rem;
             color: var(--text-secondary);
         }
+        .dias-faltantes {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .dias-urgente { background: #ef4444; color: white; }
+        .dias-proximo { background: #f59e0b; color: white; }
+        .dias-normal { background: #10b981; color: white; }
+        .dias-vencido { background: #6b7280; color: white; }
+        
+        /* Splash screen para quando o app abre */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        .splash-content {
+            text-align: center;
+            color: white;
+        }
+        .splash-logo {
+            font-size: 80px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
+<!-- Splash Screen para quando o app abre -->
+<div id="splash-screen">
+    <div class="splash-content">
+        <div class="splash-logo">⏰</div>
+        <h2>FinClock Pro</h2>
+        <p>Carregando...</p>
+    </div>
+</div>
+
 <div class="container">
     <div class="header-row">
         <div class="relogio">
             <div id="clock">--:--:--</div>
-            <div>⏰ FinClock Pro | Edição Completa</div>
+            <div>⏰ FinClock Pro</div>
         </div>
         <button class="theme-toggle" id="themeToggle">🌙</button>
     </div>
@@ -270,7 +335,7 @@
 
     <div class="tabs">
         <div class="tab ativa" data-tab="trans">💰 Transações</div>
-        <div class="tab" data-tab="agenda">📅 Agenda</div>
+        <div class="tab" data-tab="agenda">Agenda</div>
     </div>
 
     <div id="transPanel">
@@ -296,8 +361,8 @@
             <input type="number" id="agendaValor" placeholder="Valor (R$)" step="0.01">
             <input type="date" id="agendaData">
             <select id="agendaTipo">
-                <option value="pagar">💸 Conta a Pagar</option>
-                <option value="receber">💰 Conta a Receber</option>
+                <option value="pagar">Conta a Pagar</option>
+                <option value="receber">Conta a Receber</option>
             </select>
             <button id="addAgendaBtn">+ Adicionar à Agenda</button>
         </div>
@@ -305,13 +370,13 @@
             <strong>⚠️ Próximas Contas (Pagar/Receber)</strong>
             <button id="clearAgendaBtn" style="width: auto; background: #ef4444; padding: 5px 12px;">Limpar agenda</button>
         </div>
-        <ul id="agendaList" class="lista"><li class="empty">📭 Nenhuma conta agendada</li></ul>
+        <ul id="agendaList" class="lista"><li class="empty">Nenhuma conta agendada</li></ul>
     </div>
 
     <div class="card support-card">
         <div>💖 Apoie o Projeto</div>
         <div style="font-size: 0.85rem; margin-top: 6px;">Se este aplicativo está ajudando você, considere fazer uma contribuição voluntária.</div>
-        <button class="btn-support" id="supportBtn">☕ Ajudar com qualquer valor</button>
+        <button class="btn-support" id="supportBtn">💰 Doar via Mercado Pago</button>
     </div>
 </div>
 
@@ -327,8 +392,8 @@
         <select id="editTipo">
             <option value="entrada">💰 Entrada</option>
             <option value="saida">💸 Saída</option>
-            <option value="pagar">💸 Pagar</option>
-            <option value="receber">💰 Receber</option>
+            <option value="pagar">Pagar</option>
+            <option value="receber">Receber</option>
         </select>
         <div class="modal-buttons">
             <button id="saveEditBtn">💾 Salvar</button>
@@ -338,11 +403,41 @@
 </div>
 
 <script>
+    // Criar manifesto PWA dinamicamente
+    const manifest = {
+        name: "FinClock Pro",
+        short_name: "FinClock",
+        description: "Sistema de controle financeiro com agenda",
+        start_url: ".",
+        display: "standalone",
+        theme_color: "#667eea",
+        background_color: "#667eea",
+        icons: [
+            {
+                src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23764ba2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23grad)'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-weight='bold' font-family='Arial, sans-serif'%3EFC%3C/text%3E%3C/svg%3E",
+                sizes: "512x512",
+                type: "image/svg+xml",
+                purpose: "any maskable"
+            }
+        ]
+    };
+    
+    // Criar e adicionar o manifesto ao documento
+    const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
+    const manifestURL = URL.createObjectURL(manifestBlob);
+    const manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = manifestURL;
+    document.head.appendChild(manifestLink);
+    
+    // ==================== LINK DO MERCADO PAGO ====================
+    const MERCADO_PAGO_LINK = "https://mpago.la/2jTi6RV";
+
     // ==================== ESTRUTURA DE DADOS ====================
-    let transacoes = [];      // { id, desc, valor, data, hora, tipoOrigem }
-    let agenda = [];          // { id, desc, valor, data, tipo }
+    let transacoes = [];
+    let agenda = [];
     let chart;
-    let currentEditType = null;    // 'transacao' ou 'agenda'
+    let currentEditType = null;
     let currentEditId = null;
 
     // ==================== FUNÇÕES AUXILIARES ====================
@@ -361,9 +456,48 @@
         return new Date(ano, mes-1, dia).toLocaleDateString('pt-BR');
     }
 
-    function criarDataLocal(ano, mes, dia) {
-        return new Date(ano, mes - 1, dia);
+    function calcularDiasFaltantes(dataVencimento) {
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+        
+        const [ano, mes, dia] = dataVencimento.split('-').map(Number);
+        const vencimento = new Date(ano, mes-1, dia);
+        vencimento.setHours(0, 0, 0, 0);
+        
+        const diferenca = Math.ceil((vencimento - hoje) / (1000 * 60 * 60 * 24));
+        return diferenca;
     }
+
+    function getDiasFaltantesTexto(dias) {
+        if (dias < 0) {
+            return `Vencido há ${Math.abs(dias)} dias`;
+        } else if (dias === 0) {
+            return `Vence hoje!`;
+        } else if (dias === 1) {
+            return `Vence amanhã!`;
+        } else {
+            return `Faltam ${dias} dias`;
+        }
+    }
+
+    function getDiasFaltantesClasse(dias) {
+        if (dias < 0) return 'dias-vencido';
+        if (dias === 0) return 'dias-urgente';
+        if (dias <= 3) return 'dias-urgente';
+        if (dias <= 7) return 'dias-proximo';
+        return 'dias-normal';
+    }
+
+    // Esconder splash screen
+    setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        if (splash) {
+            splash.style.opacity = '0';
+            setTimeout(() => {
+                splash.style.display = 'none';
+            }, 500);
+        }
+    }, 1000);
 
     // Relógio
     function atualizarRelogio() {
@@ -414,7 +548,7 @@
         });
     }
 
-    // ==================== EDIÇÃO GENÉRICA (ENTRADA/SAÍDA ESPECIFICAÇÕES) ====================
+    // ==================== EDIÇÃO GENÉRICA ====================
     function abrirModalEdicao(tipo, id, itemAtual) {
         currentEditType = tipo;
         currentEditId = id;
@@ -426,18 +560,17 @@
         
         if (tipo === 'transacao') {
             dateContainer.style.display = 'none';
-            // Define as opções do select para transação
             editTipoSelect.innerHTML = '<option value="entrada">💰 Entrada</option><option value="saida">💸 Saída</option>';
             const isEntrada = itemAtual.valor > 0;
             editTipoSelect.value = isEntrada ? 'entrada' : 'saida';
-            document.getElementById('modalTitle').innerText = '✏️ Editar Transação (Entrada/Saída)';
+            document.getElementById('modalTitle').innerText = '✏️ Editar Transação';
         } 
         else if (tipo === 'agenda') {
             dateContainer.style.display = 'block';
             document.getElementById('editData').value = itemAtual.data || '';
-            editTipoSelect.innerHTML = '<option value="pagar">💸 Conta a Pagar</option><option value="receber">💰 Conta a Receber</option>';
+            editTipoSelect.innerHTML = '<option value="pagar">Pagar</option><option value="receber">Receber</option>';
             editTipoSelect.value = itemAtual.tipo;
-            document.getElementById('modalTitle').innerText = '✏️ Editar Agenda (Pagar/Receber)';
+            document.getElementById('modalTitle').innerText = '✏️ Editar Agenda';
         }
         document.getElementById('editModal').style.display = 'flex';
     }
@@ -457,7 +590,7 @@
         }
         
         if (currentEditType === 'transacao') {
-            const novoTipo = document.getElementById('editTipo').value; // 'entrada' ou 'saida'
+            const novoTipo = document.getElementById('editTipo').value;
             const novoValorFinal = novoTipo === 'entrada' ? novoValorNum : -novoValorNum;
             const index = transacoes.findIndex(t => t.id === currentEditId);
             if (index !== -1) {
@@ -468,7 +601,7 @@
             }
         } 
         else if (currentEditType === 'agenda') {
-            const novoTipo = document.getElementById('editTipo').value; // 'pagar' ou 'receber'
+            const novoTipo = document.getElementById('editTipo').value;
             const novaData = document.getElementById('editData').value;
             if (!novaData) {
                 alert('Selecione uma data para a agenda!');
@@ -487,7 +620,7 @@
         fecharModal();
     }
 
-    // ==================== TRANSAÇÕES (com edição) ====================
+    // ==================== TRANSAÇÕES ====================
     function deletarTransacao(id) {
         if (confirm('Remover esta transação?')) {
             transacoes = transacoes.filter(t => t.id !== id);
@@ -537,56 +670,36 @@
         document.getElementById('balance').innerHTML = `R$ ${total.toFixed(2)}`;
         document.getElementById('totalIncome').innerHTML = `R$ ${totalIn.toFixed(2)}`;
         document.getElementById('totalExpense').innerHTML = `R$ ${totalOut.toFixed(2)}`;
-
-        const lista = document.getElementById('historyList');
+        
+        const historyList = document.getElementById('historyList');
         if (transacoes.length === 0) {
-            lista.innerHTML = '<li class="empty">✨ Nenhuma transação</li>';
+            historyList.innerHTML = '<li class="empty">✨ Nenhuma transação</li>';
         } else {
-            lista.innerHTML = '';
-            transacoes.forEach(t => {
-                const li = document.createElement('li');
-                li.className = `item ${t.valor > 0 ? 'entrada' : 'saida'}`;
-                // Exibir especificações detalhadas: entrada/saída com valores claros
-                const tipoTexto = t.valor > 0 ? '💰 ENTRADA' : '💸 SAÍDA';
-                const corValor = t.valor > 0 ? '#10b981' : '#ef4444';
-                const sinal = t.valor > 0 ? '+' : '-';
-                li.innerHTML = `
-                    <div style="flex:1">
-                        <strong>${escapeHtml(t.desc)}</strong>
-                        <div class="specs-area">
-                            📌 ${tipoTexto} • R$ ${Math.abs(t.valor).toFixed(2)}
-                            <span class="spec-badge">📅 ${t.data} ⏰ ${t.hora}</span>
+            historyList.innerHTML = transacoes.map(t => `
+                <li class="item ${t.valor > 0 ? 'entrada' : 'saida'}">
+                    <div>
+                        <strong>${escapeHtml(t.desc)}</strong><br>
+                        <small>${t.data} às ${t.hora}</small>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: bold; color: ${t.valor > 0 ? '#10b981' : '#ef4444'}">
+                            ${t.valor > 0 ? '+' : '-'} R$ ${Math.abs(t.valor).toFixed(2)}
+                        </span>
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editarTransacao(${t.id})">✏️ Editar</button>
+                            <button class="delete-btn" onclick="deletarTransacao(${t.id})">🗑️ Excluir</button>
                         </div>
                     </div>
-                    <div class="item-actions">
-                        <button class="edit-btn" data-id="${t.id}">✏️ Editar</button>
-                        <button class="delete-btn" data-id="${t.id}">🗑️</button>
-                    </div>
-                `;
-                lista.appendChild(li);
-            });
-            // Eventos dinâmicos
-            document.querySelectorAll('#historyList .edit-btn').forEach(btn => {
-                btn.onclick = (e) => {
-                    e.stopPropagation();
-                    const id = parseInt(btn.getAttribute('data-id'));
-                    editarTransacao(id);
-                };
-            });
-            document.querySelectorAll('#historyList .delete-btn').forEach(btn => {
-                btn.onclick = (e) => {
-                    e.stopPropagation();
-                    const id = parseInt(btn.getAttribute('data-id'));
-                    deletarTransacao(id);
-                };
-            });
+                </li>
+            `).join('');
         }
+        
         atualizarGrafico();
     }
 
-    // ==================== AGENDA COM EDIÇÃO ====================
+    // ==================== AGENDA ====================
     function deletarAgenda(id) {
-        if (confirm('Remover esta conta da agenda?')) {
+        if (confirm('Remover este compromisso da agenda?')) {
             agenda = agenda.filter(a => a.id !== id);
             salvarAgenda();
             renderizarAgenda();
@@ -602,7 +715,13 @@
 
     function adicionarAgenda(desc, valor, data, tipo) {
         if (!desc || isNaN(valor) || valor <= 0 || !data) return false;
-        agenda.push({ id: Date.now(), desc, valor, data, tipo });
+        agenda.unshift({
+            id: Date.now(),
+            desc,
+            valor: valor,
+            data: data,
+            tipo: tipo
+        });
         salvarAgenda();
         renderizarAgenda();
         return true;
@@ -617,100 +736,98 @@
     }
 
     function renderizarAgenda() {
-        const container = document.getElementById('agendaList');
+        const agendaList = document.getElementById('agendaList');
         if (agenda.length === 0) {
-            container.innerHTML = '<li class="empty">📭 Nenhuma conta agendada</li>';
-            return;
-        }
-        container.innerHTML = '';
-        const hoje = new Date();
-        hoje.setHours(0, 0, 0, 0);
-        
-        const ordenado = [...agenda].sort((a, b) => {
-            const [anoA, mesA, diaA] = a.data.split('-').map(Number);
-            const [anoB, mesB, diaB] = b.data.split('-').map(Number);
-            return criarDataLocal(anoA, mesA, diaA) - criarDataLocal(anoB, mesB, diaB);
-        });
-        
-        ordenado.forEach(item => {
-            const [ano, mes, dia] = item.data.split('-').map(Number);
-            const dataItem = criarDataLocal(ano, mes, dia);
-            const diff = Math.ceil((dataItem - hoje) / (1000 * 3600 * 24));
-            let status = '';
-            if (diff < 0) status = `Vencido há ${-diff} dias`;
-            else if (diff === 0) status = 'Vence hoje!';
-            else if (diff === 1) status = 'Vence amanhã';
-            else status = `Vence em ${diff} dias`;
-            
-            const tipoDisplay = item.tipo === 'pagar' ? '💸 CONTA A PAGAR' : '💰 CONTA A RECEBER';
-            const corTipo = item.tipo === 'pagar' ? '#f59e0b' : '#10b981';
-            
-            const li = document.createElement('li');
-            li.className = `item ${item.tipo === 'pagar' ? 'pagar' : 'receber'}`;
-            li.innerHTML = `
-                <div style="flex:1">
-                    <strong>${escapeHtml(item.desc)}</strong>
-                    <div class="specs-area">
-                        📌 ${tipoDisplay} • Valor: R$ ${item.valor.toFixed(2)}
-                        <span class="spec-badge">📅 ${formatarDataLocal(item.data)} • ${status}</span>
+            agendaList.innerHTML = '<li class="empty">Nenhuma conta agendada</li>';
+        } else {
+            const sorted = [...agenda].sort((a,b) => {
+                const [anoA, mesA, diaA] = a.data.split('-').map(Number);
+                const [anoB, mesB, diaB] = b.data.split('-').map(Number);
+                return new Date(anoA, mesA-1, diaA) - new Date(anoB, mesB-1, diaB);
+            });
+            agendaList.innerHTML = sorted.map(a => {
+                const tipoTexto = a.tipo === 'pagar' ? 'Pagar' : 'Receber';
+                const tipoCor = a.tipo === 'pagar' ? '#f59e0b' : '#10b981';
+                const dias = calcularDiasFaltantes(a.data);
+                const diasTexto = getDiasFaltantesTexto(dias);
+                const diasClasse = getDiasFaltantesClasse(dias);
+                
+                return `
+                <li class="item ${a.tipo === 'pagar' ? 'pagar' : 'receber'}">
+                    <div>
+                        <strong>${escapeHtml(a.desc)}</strong><br>
+                        <small>Vencimento: ${formatarDataLocal(a.data)}</small><br>
+                        <span class="dias-faltantes ${diasClasse}">${diasTexto}</span>
                     </div>
-                </div>
-                <div class="item-actions">
-                    <button class="edit-btn" data-id="${item.id}">✏️ Editar</button>
-                    <button class="delete-btn" data-id="${item.id}">🗑️</button>
-                </div>
-            `;
-            container.appendChild(li);
-        });
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: bold; color: ${tipoCor}">
+                            ${tipoTexto}: R$ ${a.valor.toFixed(2)}
+                        </span>
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editarAgenda(${a.id})">✏️ Editar</button>
+                            <button class="delete-btn" onclick="deletarAgenda(${a.id})">🗑️ Excluir</button>
+                        </div>
+                    </div>
+                </li>
+            `}).join('');
+        }
+    }
+
+    // ==================== MERCADO PAGO ====================
+    function abrirMercadoPago() {
+        window.open(MERCADO_PAGO_LINK, '_blank');
+    }
+
+    // ==================== CONTROLE DE ABAS ====================
+    function initTabs() {
+        const transPanel = document.getElementById('transPanel');
+        const agendaPanel = document.getElementById('agendaPanel');
+        const tabs = document.querySelectorAll('.tab');
         
-        document.querySelectorAll('#agendaList .edit-btn').forEach(btn => {
-            btn.onclick = (e) => {
-                e.stopPropagation();
-                const id = parseInt(btn.getAttribute('data-id'));
-                editarAgenda(id);
-            };
-        });
-        document.querySelectorAll('#agendaList .delete-btn').forEach(btn => {
-            btn.onclick = (e) => {
-                e.stopPropagation();
-                const id = parseInt(btn.getAttribute('data-id'));
-                deletarAgenda(id);
-            };
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                tabs.forEach(t => t.classList.remove('ativa'));
+                tab.classList.add('ativa');
+                
+                if (tabId === 'trans') {
+                    transPanel.style.display = 'block';
+                    agendaPanel.style.display = 'none';
+                } else if (tabId === 'agenda') {
+                    transPanel.style.display = 'none';
+                    agendaPanel.style.display = 'block';
+                    renderizarAgenda();
+                }
+            });
         });
     }
 
-    // ==================== ABAS ====================
-    function trocarAba(aba) {
-        document.getElementById('transPanel').style.display = aba === 'trans' ? 'block' : 'none';
-        document.getElementById('agendaPanel').style.display = aba === 'agenda' ? 'block' : 'none';
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('ativa'));
-        if (aba === 'trans') document.querySelector('.tab[data-tab="trans"]').classList.add('ativa');
-        else document.querySelector('.tab[data-tab="agenda"]').classList.add('ativa');
-        if (aba === 'agenda') renderizarAgenda();
-    }
-
-    // ==================== INICIALIZAÇÃO ====================
-    window.onload = () => {
+    // ==================== EVENTOS E INICIALIZAÇÃO ====================
+    document.addEventListener('DOMContentLoaded', () => {
         carregarTransacoes();
         carregarAgenda();
+        initTheme();
+        initTabs();
         atualizarUI();
         renderizarAgenda();
-        initTheme();
-
-        // Eventos transações
-        document.getElementById('addTransBtn').onclick = () => {
+        
+        // Eventos das transações
+        document.getElementById('addTransBtn').addEventListener('click', () => {
             const desc = document.getElementById('desc').value.trim();
             const valor = parseFloat(document.getElementById('valor').value);
             const tipo = document.getElementById('tipo').value;
             if (adicionarTransacao(desc, valor, tipo)) {
                 document.getElementById('desc').value = '';
                 document.getElementById('valor').value = '';
-            } else alert('Preencha descrição e valor positivo');
-        };
-        document.getElementById('clearTransBtn').onclick = limparTransacoes;
+            } else {
+                alert('Preencha descrição e valor válido (maior que zero)!');
+            }
+        });
         
-        // Eventos agenda
-        document.getElementById('addAgendaBtn').onclick = () => {
+        document.getElementById('clearTransBtn').addEventListener('click', limparTransacoes);
+        
+        // Eventos da agenda
+        document.getElementById('addAgendaBtn').addEventListener('click', () => {
             const desc = document.getElementById('agendaDesc').value.trim();
             const valor = parseFloat(document.getElementById('agendaValor').value);
             const data = document.getElementById('agendaData').value;
@@ -719,26 +836,27 @@
                 document.getElementById('agendaDesc').value = '';
                 document.getElementById('agendaValor').value = '';
                 document.getElementById('agendaData').value = '';
-            } else alert('Preencha todos os campos (descrição, valor positivo e data)');
-        };
-        document.getElementById('clearAgendaBtn').onclick = limparAgenda;
-        
-        // Abas
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.onclick = () => trocarAba(tab.getAttribute('data-tab'));
+            } else {
+                alert('Preencha todos os campos corretamente! Valor deve ser maior que zero.');
+            }
         });
-        document.getElementById('themeToggle').onclick = toggleTheme;
         
-        // Modal
-        document.getElementById('saveEditBtn').onclick = salvarEdicao;
-        document.getElementById('closeModalBtn').onclick = fecharModal;
-        window.onclick = (e) => { if (e.target === document.getElementById('editModal')) fecharModal(); };
+        document.getElementById('clearAgendaBtn').addEventListener('click', limparAgenda);
         
-        // Apoio
-        const linkMP = 'https://mpago.la/2jTi6RV';
-        document.getElementById('supportCenterBtn').onclick = () => window.open(linkMP, '_blank');
-        document.getElementById('supportBtn').onclick = () => window.open(linkMP, '_blank');
-    };
+        // Tema
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        
+        // Modal de edição
+        document.getElementById('saveEditBtn').addEventListener('click', salvarEdicao);
+        document.getElementById('closeModalBtn').addEventListener('click', fecharModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('editModal')) fecharModal();
+        });
+        
+        // Botões de apoio com Mercado Pago
+        document.getElementById('supportCenterBtn').addEventListener('click', abrirMercadoPago);
+        document.getElementById('supportBtn').addEventListener('click', abrirMercadoPago);
+    });
 </script>
 </body>
 </html>
